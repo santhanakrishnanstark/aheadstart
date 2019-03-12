@@ -7,6 +7,7 @@ import PostTitle from '../PostTitle/PostTitle';
 class Content extends Component {
 
     state = {
+        name:'',
         text:'',
         posts:[],
         lists : []
@@ -26,13 +27,22 @@ class Content extends Component {
         this.setState({lists : newlist });
     }
     saveList =()=>{
-        const lists =  this.state.lists;
-        axios.post('/lists.json',lists)
+        const head =  this.state.name;
+        const posts = {
+            head :{
+                name : head,
+                list : this.state.lists 
+            }
+        }
+        axios.post('/lists.json',posts)
             .then(response => console.log(response))
             .catch(error => console.log(error));
     }
     changeHandler =(e) =>{
         this.setState({text : e.target.value});
+    }
+    changeNameHandler =(e) =>{
+        this.setState({name : e.target.value});
     }
     removeList =(index) =>{
         const lists = [...this.state.lists];
@@ -44,6 +54,9 @@ class Content extends Component {
     return (
         <div>
             <h4>Add List items</h4>
+            <input type="text"  
+            onChange={this.changeNameHandler}    
+            className="form-control" /> <br/>
             <input type="text"  
             onChange={this.changeHandler}    
             className="form-control" /> <br/>
