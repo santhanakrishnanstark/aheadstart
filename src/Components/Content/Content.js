@@ -36,9 +36,9 @@ class Content extends Component {
         axios.post('/lists.json',posts)
             .then(response => { this.setState({status:'Saved Successfully!'});
         })
-            .catch(error => { this.setState({status:'Not Saved Error Found!'});
+            .catch(error => { this.setState({status:'Not Saved Error!'});
         });
-    }
+    } 
     changeHandler =(e) =>{
         this.setState({text : e.target.value});
     }
