@@ -10,7 +10,8 @@ class Content extends Component {
         name:'',
         text:'',
         posts:[],
-        lists : []
+        lists : [],
+        status:''
     };
 
 
@@ -29,14 +30,14 @@ class Content extends Component {
     saveList =()=>{
         const head =  this.state.name;
         const posts = {
-            head :{
                 name : head,
                 list : this.state.lists 
-            }
         }
         axios.post('/lists.json',posts)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+            .then(response => { this.setState({status:'Saved Successfully!'});
+        })
+            .catch(error => { this.setState({status:'Not Saved Error Found!'});
+        });
     }
     changeHandler =(e) =>{
         this.setState({text : e.target.value});
@@ -74,6 +75,8 @@ class Content extends Component {
              onClick={this.saveList}
             className="btn btn-success form-control"> Save
             </button>
+            <br/>
+            <p>{this.state.status}</p>
             <PostTitle posts={this.state.posts}  />
         </div>
     );
