@@ -19,7 +19,7 @@ class Content extends Component {
                 this.setState({posts : response.data});
                 console.log(response);
             });
-    }  */
+    } not now */
     
     listHandler =() =>{  
         const newlist = this.state.lists.concat(this.state.text);
